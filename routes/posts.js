@@ -6,9 +6,9 @@ import auth from '../middleware/auth.js';
 
 router.get('/', getPosts);
 router.get('/search', getPostsBySearch);
-router.post('/', createPost);
+router.post('/:user', createPost);
 router.patch('/:id', updatePost);
-router.delete('/:id', deletePost);
+router.delete('/:id/:user', deletePost);
 router.patch('/:user/likePost/:id', likePost);
 router.get('/:id', getPost);
 

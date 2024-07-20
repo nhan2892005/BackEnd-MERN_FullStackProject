@@ -51,8 +51,9 @@ export const getPost = async (req, res) => {
 export const createPost = async (req, res) => {
     const post = req.body;
 
-    const newPostMessage = new PostMessage({ ...post, creator: req.userId, createdAt: new Date().toISOString() })
+    const { user } = req.params;
 
+    const newPostMessage = new PostMessage({ ...post, creator: user, createdAt: new Date().toISOString() })
     try {
         await newPostMessage.save();
 
@@ -76,11 +77,17 @@ export const updatePost = async (req, res) => {
 }
 
 export const deletePost = async (req, res) => {
-    const { id } = req.params;
+    const { id, user } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send(`No post with id: ${id}`);
 
-    await PostMessage.findByIdAndDelete(id);
+    const post = await PostMessage.findById(id);
+
+    if (post.creator !== user) {
+        return res.status(404).json({ message: "You can't delete this post." });
+    } else {
+        await PostMessage.findByIdAndDelete(id);
+    }
 
     res.json({ message: "Post deleted successfully." });
 }
