@@ -5,7 +5,7 @@
     <img src="https://img.shields.io/badge/Express-v4.17.1-blue?logo=express" alt="Express">
     <img src="https://img.shields.io/badge/Redux-v4.0.5-purple?logo=redux" alt="Redux">
     <img src="https://img.shields.io/badge/Node.js-v14.17.0-green?logo=node.js" alt="NodeJs">
-  </div>
+  </div> 
 
   <h3 align="center">API of Social Web App</h3>
 </div>
